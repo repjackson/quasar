@@ -4,6 +4,7 @@ import { RouterFactory } from 'meteor/akryum:vue-router2'
 import Home from '/imports/ui/Home.vue'
 import Session from '/imports/ui/Session.vue'
 import Help from '/imports/ui/Help.vue'
+import ActionButton from '/imports/ui/ActionButton.vue'
 
 RouterFactory.configure(factory => {
     // Simple routes
@@ -22,6 +23,11 @@ RouterFactory.configure(factory => {
             path: '/help',
             name: 'help',
             component: Help,
+        },
+        {
+            path: '/fab',
+            name: 'fab',
+            component: ActionButton,
         },
     ])
 })
