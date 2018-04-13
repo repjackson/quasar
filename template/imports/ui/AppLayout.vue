@@ -1,74 +1,53 @@
-<template name="appLayout">
+<template name='appLayout' lang='pug'>
 
     <!-- be careful when you change the 'view' prop, check the layout docs -->
-    <!--  LHr lpR lfr - with class="fixed-bottom" on the footer seems to be the only possibility
+    <!--  LHr lpR lfr - with class='fixed-bottom' on the footer seems to be the only possibility
         that works both for desktop and mobile -->
 
-    <q-layout ref="layout" view="LHr lpR lFr">
+    q-layout(ref='layout' view='LHr lpR lFr')
+        q-layout-header
+            q-toolbar(color='dark')
+                q-btn(flat round dense @click='showLeft = !showLeft' icon='menu')
 
-        <q-layout-header>
-            <q-toolbar color="dark">
-                <q-btn
-                        flat round dense
-                        @click="showLeft = !showLeft"
-                        icon="menu"
-                />
-
-                <q-toolbar-title>
-                    dao
-                    <!--<span slot="subtitle">Optional subtitle</span>-->
-                </q-toolbar-title>
+                q-toolbar-title 
+                    |dao
+                    span(slot='subtitle') the way
 
                 <!-- showRight is a model attached to right side drawer below -->
-                <q-btn
-                        flat round dense
-                        @click="showRight = !showRight"
-                        icon="menu"
-                />
-            </q-toolbar>
+                q-btn(flat round dense icon='sim_card' to='/profile')
+
+                q-btn(flat round dense @click='showRight = !showRight' icon='menu')
             
-            <q-tabs color='dark'>
-                <q-route-tab slot="title" icon="save" to="/" replace label="PubSub" />
-                <q-route-tab slot="title" icon="alarm" to="/session" replace label="Session" />
-                <q-route-tab slot="title" icon="help" to="/help" replace label="Help" />
-            </q-tabs>
-        </q-layout-header>
+            q-tabs(color='dark')
+                q-route-tab(slot='title' icon='save' to='/' replace label='PubSub')
+                q-route-tab(slot='title' icon='alarm' to='/session' replace label='Session')
+                q-route-tab(slot='title' icon='help' to='/help' replace label='Help')
+                q-route-tab(slot='title' icon='keyboard_arrow_up' to='/fab' replace label='FAB')
+                q-route-tab(slot='title' icon='mail' to='/mail' replace label='Mail')
+                q-route-tab(slot='title' icon='settings' to='/settings' replace label='Settings')
 
-        <q-layout-drawer side="left" v-model="showLeft" color='dark'>
-            <q-list no-border link inset-separator>
-                <q-list-header>Essential Links</q-list-header>
-                <q-item to="/">
-                    <q-item-side icon="save" />
-                    <q-item-main label="PubSub" />
-                </q-item>
-                <q-item to="/session">
-                    <q-item-side icon="alarm" />
-                    <q-item-main label="Session" />
-                </q-item>
-                <q-item to="/help">
-                    <q-item-side icon="help" />
-                    <q-item-main label="Help" />
-                </q-item>
-            </q-list>
-        </q-layout-drawer>
+        q-layout-drawer(side='left' v-model='showLeft' color='dark')
+            q-list(no-border link inset-separator color='dark')
+                q-list-header Essential Links
+                q-item(to='/')
+                    q-item-side(icon='save')
+                    q-item-main(label='PubSub')
+                q-item(to='/session')
+                    q-item-side(icon='alarm')
+                    q-item-main(label='Session')
+                q-item(to='/help')
+                    q-item-side(icon='help')
+                    q-item-main(label='Help')
 
-        <q-layout-drawer side="right" v-model="showRight">
-            <span>Right Side of Layout</span>
-        </q-layout-drawer>
+        q-layout-drawer(side='right' v-model='showRight')
+            span Right Side of Layout
 
-        <q-page-container>
-            <router-view></router-view>
-        </q-page-container>
+        q-page-container
+            router-view
 
-        <q-layout-footer color='dark'>
-            <q-toolbar color='dark'>
-                <q-toolbar-title>
-                    (c) facet
-                </q-toolbar-title>
-            </q-toolbar>
-        </q-layout-footer>
-
-    </q-layout>
+        q-layout-footer(color='dark')
+            q-toolbar(color='dark')
+                q-toolbar-title (c) facet
 
 </template>
 
